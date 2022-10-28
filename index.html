@@ -10,11 +10,8 @@
     <div class="container">
       <h2 class="center">TODOLIST</h2>
       <div id="addItem">
-        <input id="addItemText" type="text" /><button
-          onclick="AddHtmlElement()"
-        >
-          +
-        </button>
+        <input id="textElement" type="text" />
+        <button onclick="AddHtmlElement()">+</button>
       </div>
       <div id="itemList">
         <!-- <div class="itemListEl">
@@ -27,17 +24,16 @@
       var counter = 1;
 
       function AddHtmlElement() {
-        let textElement = document.getElementById('addItemText');
+        let textElement = document.getElementById('textElement');
         let text = textElement.value;
         let divElement = document.getElementById('itemList');
         let newdiv = document.createElement('div');
         newdiv.setAttribute('id', counter);
-        newdiv.setAttribute('class', 'listItemContainer');
+        newdiv.setAttribute('class', 'listItem');
         divElement.appendChild(newdiv);
         newdiv.innerHTML = `
-        <div class="itemListEl">
-        <p>${text}</p><a href='#' onclick=removeListItem(${counter})>X</a>
-        </div>
+        <input type='checkbox' onClick='taskCompleteToggle(${counter})'>
+        <span>${text}</span><a href='#' onclick=removeListItem(${counter})>X</a>
         `;
         counter += 1;
         textElement.value = '';
@@ -47,6 +43,12 @@
         let divId = document.getElementById('itemList');
         let childEl = document.getElementById(divNum);
         divId.removeChild(childEl);
+      }
+      function taskCompleteToggle(divNum) {
+        let divId = document.getElementById('itemList');
+        let childEl = document.getElementById(divNum);
+        let textEl = childEl.getElementsByTagName('span')[0];
+        textEl.classList.toggle('strikethrough');
       }
     </script>
   </body>
