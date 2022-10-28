@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <!-- <link rel="stylesheet" href="./style.css" /> -->
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="center">TODOLIST</h2>
+      <div id="addItem">
+        <input id="addItemText" type="text" /><button
+          onclick="AddHtmlElement()"
+        >
+          +
+        </button>
+      </div>
+      <div id="itemList">
+        <!-- <div class="itemListEl">
+        <a href='#' onclick=removeListItem(${counter})>X</a>
+      </div> -->
+      </div>
+    </div>
+
+    <script>
+      var counter = 1;
+
+      function AddHtmlElement() {
+        let textElement = document.getElementById('addItemText');
+        let text = textElement.value;
+        let divElement = document.getElementById('itemList');
+        let newdiv = document.createElement('div');
+        newdiv.setAttribute('id', counter);
+        newdiv.setAttribute('class', 'listItemContainer');
+        divElement.appendChild(newdiv);
+        newdiv.innerHTML = `
+        <div class="itemListEl">
+        <p>${text}</p><a href='#' onclick=removeListItem(${counter})>X</a>
+        </div>
+        `;
+        counter += 1;
+        textElement.value = '';
+      }
+
+      function removeListItem(divNum) {
+        let divId = document.getElementById('itemList');
+        let childEl = document.getElementById(divNum);
+        divId.removeChild(childEl);
+      }
+    </script>
+  </body>
+</html>
